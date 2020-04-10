@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/space_rock.ogg-633b1d52b57259cbfd82b8dd827b5167.oggstr"
+
+[deps]
+
+source_file="res://assets/music/space_rock.ogg"
+dest_files=[ "res://.import/space_rock.ogg-633b1d52b57259cbfd82b8dd827b5167.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

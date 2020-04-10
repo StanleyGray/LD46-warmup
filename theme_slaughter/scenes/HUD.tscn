@@ -1,0 +1,150 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scripts/HUD.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 64
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 64
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 64
+font_data = ExtResource( 1 )
+
+[sub_resource type="InputEventAction" id=6]
+action = "ui_select"
+
+[sub_resource type="ShortCut" id=7]
+shortcut = SubResource( 6 )
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="ScoreContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+margin_bottom = 78.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreBar" type="HBoxContainer" parent="ScoreContainer"]
+margin_right = 800.0
+margin_bottom = 78.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreLabel" type="Label" parent="ScoreContainer/ScoreBar"]
+margin_left = 180.0
+margin_right = 360.0
+margin_bottom = 78.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 0.898039, 0.0509804, 1 )
+text = "9999"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DividerLabel" type="Label" parent="ScoreContainer/ScoreBar"]
+margin_left = 364.0
+margin_right = 436.0
+margin_bottom = 78.0
+custom_fonts/font = SubResource( 2 )
+text = " / "
+valign = 1
+
+[node name="CountLabel" type="Label" parent="ScoreContainer/ScoreBar"]
+margin_left = 440.0
+margin_right = 620.0
+margin_bottom = 78.0
+custom_fonts/font = SubResource( 2 )
+text = "9999"
+valign = 1
+
+[node name="TitleContainer" type="VBoxContainer" parent="."]
+margin_left = 112.0
+margin_top = 239.0
+margin_right = 687.0
+margin_bottom = 360.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleLabel" type="Label" parent="TitleContainer"]
+margin_right = 575.0
+margin_bottom = 78.0
+custom_fonts/font = SubResource( 3 )
+text = "Theme Slaughter"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SubtitleLabel" type="Label" parent="TitleContainer"]
+margin_top = 82.0
+margin_right = 575.0
+margin_bottom = 121.0
+custom_fonts/font = SubResource( 4 )
+text = "Ludum Dare 46"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MessageLabel" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -400.0
+margin_top = -300.0
+margin_right = 400.0
+margin_bottom = 300.0
+custom_fonts/font = SubResource( 3 )
+text = "Game Over"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -88.0
+margin_top = -200.0
+margin_right = 92.0
+margin_bottom = -100.0
+custom_fonts/font = SubResource( 5 )
+shortcut_in_tooltip = false
+shortcut = SubResource( 7 )
+text = "Start"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+[connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]
