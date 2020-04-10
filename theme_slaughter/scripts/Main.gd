@@ -7,25 +7,28 @@ var score = 0
 var despawned = 0
 var shoot_enabled = false
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Randomize RNG seed
 	randomize()
+	# Initialize theme count/score
 	if $ThemeList.is_loaded():
 		$HUD.update_count($ThemeList.get_count())
 	$HUD.update_score(score)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
 
 
-# Change the target whenever a touch event happens.
+# Input handler
 func _input(event):
 	# Touch event or mouse click
 	if event is InputEventScreenTouch and event.pressed:
 		shoot()
-	# Keyboard key press	
+	# Keyboard key press
 	elif event is InputEventKey and event.pressed \
 			and (event.scancode == KEY_Z or event.scancode == KEY_SPACE):
 		shoot()
@@ -80,6 +83,7 @@ func spawn(text):
 	_err = $HUD.connect("start_game", mob, "_on_start_game")
 	_err = mob.connect("despawned", self, "_on_mob_despawned")
 
+
 func _on_StartTimer_timeout():
 	# Start the game - enable mob spawning and player shooting
 	$MobTimer.start()
@@ -88,7 +92,6 @@ func _on_StartTimer_timeout():
 
 func _on_MobTimer_timeout():
 	if $ThemeList.is_loaded() and $ThemeList.get_remaining() > 0:
-		#print("Spawning mob")
 		var mob_text = $ThemeList.get_next()
 		spawn(mob_text)
 

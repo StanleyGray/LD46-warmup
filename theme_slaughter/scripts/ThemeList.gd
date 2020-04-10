@@ -45,7 +45,8 @@ func reset():
 
 func get_next():
 	var next_theme = cur_list.pop_back()
-	# Return as string instead of PoolStringArray
+	# Returned value from list is type PoolStringArray
+	# The first array element should have the string we want
 	return next_theme[0]
 
 

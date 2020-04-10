@@ -2,7 +2,6 @@ extends RigidBody2D
 
 signal despawned
 
-
 export var min_speed = 150 # Minimum speed range.
 export var max_speed = 250 # Maximum speed range.
 var mob_types = ["walk", "swim", "fly"]
@@ -11,7 +10,6 @@ var exploding = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#TODO: select random remaining theme and set label
 	pass
 
 
@@ -47,12 +45,13 @@ func _on_Visibility_screen_exited():
 
 # Called at start of game to delete any leftover mobs
 func _on_start_game():
-	# Don't signal
+	# Don't emit signal in this case
 	remove()
 
-	
+
 func _on_shot():
 	if not exploding:
+		# Check if mob was hit by player's shot
 		var mouse_pos = get_global_mouse_position()
 	
 		var intersections = get_world_2d().direct_space_state.intersect_point( 
@@ -65,15 +64,7 @@ func _on_shot():
 
 func set_text(text):
 	$ThemeLabel.text = text
-	#print("Mob.set_text(): text =" + text)
 	var string_size = $ThemeLabel.get_font("font").get_string_size(text)
 	# Resize the collision rect to match the text size
-	if string_size is Vector2:
-#		var shape = self.shape_owner_get_shape(self.get_instance_id(),$CollisionShape2D.get_instance_id())
-#		shape.extents = string_size
-		$CollisionShape2D.shape = $CollisionShape2D.shape.duplicate()
-		$CollisionShape2D.shape.extents = string_size
-		#print("Mob.set_text(): string_size =" + str(string_size.x) + "," + str(string_size.y))
-	else:
-		print("Mob.set_text(): Couldn't get string size!")
-	return
+	$CollisionShape2D.shape = $CollisionShape2D.shape.duplicate()
+	$CollisionShape2D.shape.extents = string_size
